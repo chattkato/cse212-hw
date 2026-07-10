@@ -6,28 +6,44 @@ public static class Arrays
     /// integer greater than 0.
     /// </summary>
     /// <returns>array of doubles that are the multiples of the supplied number</returns>
-    public static double[] MultiplesOf(double number, int length)
-    {
-        // TODO Problem 1 Start
-        // Remember: Using comments in your program, write down your process for solving this problem
-        // step by step before you write the code. The plan should be clear enough that it could
-        // be implemented by another person.
+    public static double[] MultiplesOf(double number, int amount)
+{
+    // Plan:
+    // 1. I need to return an array of doubles with 'amount' elements.
+    // 2. Each element at index i should be the (i+1)th multiple of 'number',
+    //    i.e. number * 1, number * 2, number * 3, ... number * amount.
+    // 3. Create an array of size 'amount'.
+    // 4. Loop from 0 to amount-1, and at each index store number * (index+1).
+    // 5. Return the filled array.
 
-        return []; // replace this return statement with your own
+    double[] multiples = new double[amount];
+
+    for (int i = 0; i < amount; i++)
+    {
+        multiples[i] = number * (i + 1);
     }
 
-    /// <summary>
-    /// Rotate the 'data' to the right by the 'amount'.  For example, if the data is 
-    /// List<int>{1, 2, 3, 4, 5, 6, 7, 8, 9} and an amount is 3 then the list after the function runs should be 
-    /// List<int>{7, 8, 9, 1, 2, 3, 4, 5, 6}.  The value of amount will be in the range of 1 to data.Count, inclusive.
-    ///
-    /// Because a list is dynamic, this function will modify the existing data list rather than returning a new list.
-    /// </summary>
-    public static void RotateListRight(List<int> data, int amount)
-    {
-        // TODO Problem 2 Start
-        // Remember: Using comments in your program, write down your process for solving this problem
-        // step by step before you write the code. The plan should be clear enough that it could
-        // be implemented by another person.
-    }
+    return multiples;
+}
+       public static void RotateListRight(List<int> data, int amount)
+{
+    // Plan:
+    // 1. Rotating right by 'amount' means the last 'amount' elements move to
+    //    the front, and everything else shifts right to fill in behind them.
+    // 2. Using list slicing:
+    //    - The "tail" is the last 'amount' elements: data.GetRange(data.Count - amount, amount)
+    //    - The "head" is everything before that: data.GetRange(0, data.Count - amount)
+    // 3. Clear the original list.
+    // 4. Add the tail first, then add the head after it.
+    //    This reconstructs the list in the rotated order.
+
+    int count = data.Count;
+
+    List<int> tail = data.GetRange(count - amount, amount);
+    List<int> head = data.GetRange(0, count - amount);
+
+    data.Clear();
+    data.AddRange(tail);
+    data.AddRange(head);
+}
 }
